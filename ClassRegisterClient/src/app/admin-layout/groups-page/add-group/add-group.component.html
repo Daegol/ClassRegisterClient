@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<div>
     <app-page-header [heading]="'Klasy'" [icon]="'fa-group'"></app-page-header>
     <div class="container-12">
         <div class="card-body">
@@ -6,87 +6,88 @@
                 <div class="card col-md-12">
                     <div class="card-body">
                         <h5 class="card-title text-center">Utwórz nową klasę</h5>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-5 my-auto">
-                                        <select class="browser-default custom-select ">
-                                                <option selected>Wybierz wychowawcę</option>
-                                                <option *ngFor="let el of studentElements; let i = index" value={{el.Pesel}}>
-                                                    {{el.FirstName}} {{el.FirstName}}
-                                                </option>
-                                            </select>
-                                </div>
-                               
-                                <div class="col-md-5 my-auto">
-                                    <div class="form text-center">
-                                        <input mdbInput type="text" id="form1" class="form-control"
-                                            placeholder="Podaj nazwę grupy">
+                        <form [formGroup]="form">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-5 my-auto">
+                                        <select class="browser-default custom-select " formControlName="tutor">
+                                            <option selected>Wybierz wychowawcę</option>
+                                            <option *ngFor="let el of teacherElements; let i = index"
+                                                value={{el.id}}>
+                                                {{el.firstName}} {{el.lastName}} {{el.pesel}}
+                                            </option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="form  text-center col-md-2">
-                                    <button mdbBtn color="success" size="xl" mdbWavesEffect
-                                        [routerLink]="['add']">Dodaj</button>
+                                    <div class="col-md-5 my-auto">
+                                        <div class="form text-center">
+                                            <input formControlName="name" mdbInput type="text" id="form"
+                                                class="form-control" placeholder="Podaj nazwę grupy">
+                                        </div>
+                                    </div>
+                                    <div class="form  text-center col-md-2">
+                                        <button mdbBtn color="success" size="xl" mdbWavesEffect
+                                            (click)='addGroup()'>Dodaj</button>
+                                    </div>
+
+
                                 </div>
                             </div>
-
+                        </form>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <h6 class="card-title text-left">Wybierz uczniów</h6>
+                                    <div class="md-form">
+                                        <input type="text" [(ngModel)]="searchText" class="form-control" id="search"
+                                            mdbInput />
+                                        <label for="search">Szukaj</label>
+                                    </div>
+                                    <div id="table">
+                                        <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true"
+                                            class="z-depth-1 text-center">
+                                            <thead class="sticky-top">
+                                                <tr>
+                                                    <th *ngFor="let head of studentHeadElements; let i = index"
+                                                        [mdbTableSort]="studentElements" [sortBy]="studentTableNames[i]"
+                                                        scope="col">
+                                                        {{head | titlecase}}
+                                                        <mdb-icon fas icon="sort"></mdb-icon>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody #row>
+                                                <tr *ngFor="let el of studentElements; let i = index">
+                                                    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        scope="row">
+                                                        <input type="checkbox" [(ngModel)]='el.isChecked'>
+                                                    </th>
+                                                    <td
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        {{el.firstName}}
+                                                    </td>
+                                                    <td
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        {{el.lastName}}
+                                                    </td>
+                                                    <td
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        {{el.pesel}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot class="grey lighten-5 w-100">
+                                                <tr>
+                                                    <td colspan="8">
+                                                        <mdb-table-pagination [tableEl]="tableEl" paginationAlign=""
+                                                            [searchDataSource]="studentElements">
+                                                        </mdb-table-pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card col-md-12">
-                    <div class="card-body">
-                        <h6 class="card-title text-left">Wybierz uczniów</h6>
-                        <div class="md-form">
-                            <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput />
-                            <label for="search">Szukaj</label>
-                        </div>
-                        <div id="table">
-                            <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" striped="true"
-                                class="z-depth-1 text-center">
-                                <thead class="sticky-top">
-                                    <tr>
-                                        <th *ngFor="let head of studentHeadElements; let i = index"
-                                            [mdbTableSort]="studentElements" [sortBy]="studentTableNames[i]"
-                                            scope="col">
-                                            {{head | titlecase}}
-                                            <mdb-icon fas icon="sort"></mdb-icon>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody #row>
-                                    <tr *ngFor="let el of studentElements; let i = index">
-                                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                            scope="row">
-                                            <input type="checkbox" [(ngModel)]='el.isChecked'>
-                                        </th>
-                                        <td
-                                            *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                                            {{el.FirstName}}
-                                        </td>
-                                        <td
-                                            *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                                            {{el.LastName}}
-                                        </td>
-                                        <td
-                                            *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                                            {{el.Pesel}}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot class="grey lighten-5 w-100">
-                                    <tr>
-                                        <td colspan="8">
-                                            <mdb-table-pagination [tableEl]="tableEl" paginationAlign=""
-                                                [searchDataSource]="studentElements">
-                                            </mdb-table-pagination>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>

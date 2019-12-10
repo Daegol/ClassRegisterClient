@@ -1,8 +1,6 @@
 import { Guid } from 'guid-typescript';
-
-export class StudentsInGroup {
+export class TeacherInGroup {
     id: Guid;
-    isChecked: boolean;
     firstName: string;
     lastName: string;
     pesel: string;

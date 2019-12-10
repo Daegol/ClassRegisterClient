@@ -1,3 +1,4 @@
+import { StudentsInGroup } from 'src/app/shared/models/studentsInGroup';
 import { UserTable } from './../models/userTable';
 import { UserRegistrationDto } from './../models/userRegistrationDto';
 import { Injectable } from '@angular/core';
@@ -23,5 +24,9 @@ export class StudentService {
 
     update(student: Student) {
         return this.http.put(`${environment.apiUrl}students/update`, student);
+    }
+
+    getToGroup() {
+        return this.http.get<StudentsInGroup[]>(`${environment.apiUrl}students/stg`);
     }
 }

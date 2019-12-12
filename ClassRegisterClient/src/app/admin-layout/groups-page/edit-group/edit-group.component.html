@@ -11,9 +11,8 @@
                                 <div class="row">
                                     <div class="col-md-5 my-auto">
                                         <select class="browser-default custom-select " formControlName="tutor">
-                                            <option selected value="0">Wybierz wychowawcę</option>
                                             <option *ngFor="let el of teacherElements; let i = index"
-                                                value={{el.id}}>
+                                                value={{el.pesel}}>
                                                 {{el.firstName}} {{el.lastName}} {{el.pesel}}
                                             </option>
                                         </select>
@@ -26,7 +25,7 @@
                                     </div>
                                     <div class="form  text-center col-md-1">
                                         <button mdbBtn [disabled]="form.invalid" color="success" size="xl" mdbWavesEffect
-                                            (click)='addGroup()'>Dodaj</button>
+                                            (click)='editGroup()'>Dodaj</button>
                                     </div>
                                     <div class="form  text-center col-md-1">
                                     <button mdbBtn color="danger" size="xl" mdbWavesEffect

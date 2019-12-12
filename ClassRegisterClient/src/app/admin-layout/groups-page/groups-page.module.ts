@@ -7,10 +7,11 @@ import { PageHeaderModule } from './../../shared';
 import { TableModule, IconsModule, WavesModule, ButtonsModule, MDBBootstrapModule, InputsModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddGroupComponent } from './add-group/add-group.component';
+import { EditGroupComponent } from './edit-group/edit-group.component';
 
 
 @NgModule({
-  declarations: [GroupsPageComponent, AddGroupComponent],
+  declarations: [GroupsPageComponent, AddGroupComponent, EditGroupComponent],
   imports: [
     CommonModule,
     GroupsPageRoutingModule,

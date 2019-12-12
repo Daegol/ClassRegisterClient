@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GroupsPageComponent } from './groups-page.component';
 import { AddGroupComponent } from './add-group/add-group.component';
+import { EditGroupComponent } from './edit-group/edit-group.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddGroupComponent
+  },
+  {
+    path: 'edit',
+    component: EditGroupComponent
   }
 ];
 

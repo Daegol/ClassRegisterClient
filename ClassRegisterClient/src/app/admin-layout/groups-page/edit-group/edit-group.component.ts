@@ -1,20 +1,21 @@
-import { GroupToSend } from '../../../shared/models/groupToSend';
-import { TeacherInGroup } from './../../../shared/models/teacherInGroup';
-import { Component, OnInit, ViewChild, ChangeDetectorRef, HostListener } from '@angular/core';
-import { MdbTableDirective, MdbTablePaginationComponent, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
-import { StudentService, AlertService, TeacherService, GroupService } from 'src/app/shared';
+import { GroupsTable } from 'src/app/shared/models/groupsTable';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { MdbTableDirective, MdbTablePaginationComponent, MDBModalRef } from 'angular-bootstrap-md';
 import { StudentsInGroup } from 'src/app/shared/models/studentsInGroup';
-import { first } from 'rxjs/operators';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, FormControl } from '@angular/forms';
+import { TeacherInGroup } from 'src/app/shared/models/teacherInGroup';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { StudentService, TeacherService, AlertService, GroupService } from 'src/app/shared';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { GroupToEdit } from 'src/app/shared/models/groupToEdit';
 import { Guid } from 'guid-typescript';
 
 @Component({
-  selector: 'app-add-group',
-  templateUrl: './add-group.component.html',
-  styleUrls: ['./add-group.component.scss']
+  selector: 'app-edit-group',
+  templateUrl: './edit-group.component.html',
+  styleUrls: ['./edit-group.component.scss']
 })
-export class AddGroupComponent implements OnInit {
+export class EditGroupComponent implements OnInit {
 
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -25,6 +26,7 @@ export class AddGroupComponent implements OnInit {
   searchText = '';
   previous: string;
   form: FormGroup;
+  currentEditedClass: GroupsTable;
 
   modalRef: MDBModalRef;
 
@@ -37,10 +39,11 @@ export class AddGroupComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.groupService.currentEditedClassId.subscribe(message => this.currentEditedClass = message);
     this.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(1)]],
+      name: [this.currentEditedClass.name, [Validators.required, Validators.minLength(1)]],
       tutor: new FormControl('0')
-    }, {validators: tutorValidator});
+    }, { validators: tutorValidator });
     this.getTeachersToGroup();
     this.getStudentsToGroup();
   }
@@ -67,6 +70,8 @@ export class AddGroupComponent implements OnInit {
       .subscribe(
         result => {
           this.teacherElements = result;
+          this.form.controls['tutor'].setValue(this.currentEditedClass.tutorPesel);
+          console.log(this.form['tutor']);
         },
         error => {
           this.alertService.error(error.message);
@@ -86,17 +91,9 @@ export class AddGroupComponent implements OnInit {
         });
   }
 
-  addGroup() {
-    const group: GroupToSend = { name: this.form.value.name, tutorId: this.form.value.tutor, studentsId: this.getCheckedStudents() };
-    this.groupService.addGroup(group).pipe(first()).subscribe(
-      request => {
-        this.alertService.success('Dodano grupę', true);
-        this.router.navigate(['groups-page']);
-      },
-      error => {
-        this.alertService.error(error);
-      }
-    );
+  editGroup() {
+    const group: GroupToEdit = { name: this.form.value.name, tutorId: this.form.value.tutor,
+      studentsId: this.getCheckedStudents(), classId: this.currentEditedClass.databaseId };
   }
 
   getCheckedStudents() {
@@ -111,10 +108,10 @@ export class AddGroupComponent implements OnInit {
 
   get name() { return this.form.get('name'); }
 
+
   cancel() {
     this.router.navigate(['groups-page']);
   }
-
 }
 
 export const tutorValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {

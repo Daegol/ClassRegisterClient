@@ -6,4 +6,5 @@ export class StudentsInGroup {
     firstName: string;
     lastName: string;
     pesel: string;
+    studentClass: string;
 }

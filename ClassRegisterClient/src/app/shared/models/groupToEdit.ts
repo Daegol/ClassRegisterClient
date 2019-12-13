@@ -1,7 +1,7 @@
 import { Guid } from 'guid-typescript';
 export class GroupToEdit {
     name: string;
-    tutorId: Guid;
+    tutorId: string;
     studentsId: Guid[];
     classId: Guid;
 }

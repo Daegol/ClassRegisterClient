@@ -13,13 +13,16 @@ import { MDBBootstrapModule, ModalModule } from 'angular-bootstrap-md';
 import { ModalAddComponent } from './shared/modules/modal-add/modal-add.component';
 import { AddHeaderInterceptor, AddHeaderInterceptorProvider } from './shared/interceptors/add-header.interceptor';
 import { ErrorInterceptorProvider } from './shared/interceptors/error.interceptor';
-
+import { ModalAddSubjectComponent } from './shared/modules/modal-add-subject/modal-add-subject.component';
+import { ModalEditSubjectComponent } from './shared/modules/modal-edit-subject/modal-edit-subject.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalEditComponent,
     ModalAddComponent,
+    ModalAddSubjectComponent,
+    ModalEditSubjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { ErrorInterceptorProvider } from './shared/interceptors/error.intercepto
   providers: [AddHeaderInterceptorProvider,
   ErrorInterceptorProvider
 ],
-  entryComponents: [ModalEditComponent, ModalAddComponent],
+  entryComponents: [ModalEditComponent, ModalAddComponent, ModalAddSubjectComponent, ModalEditSubjectComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

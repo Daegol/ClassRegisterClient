@@ -1,3 +1,4 @@
+import { LessonPlanComponent } from './lesson-plan/lesson-plan.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GroupsPageComponent } from './groups-page.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'edit',
     component: EditGroupComponent
+  },
+  {
+    path: 'plan',
+    component: LessonPlanComponent
   }
 ];
 

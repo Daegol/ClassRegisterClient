@@ -8,10 +8,11 @@ import { TableModule, IconsModule, WavesModule, ButtonsModule, MDBBootstrapModul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { EditGroupComponent } from './edit-group/edit-group.component';
+import { LessonPlanComponent } from './lesson-plan/lesson-plan.component';
 
 
 @NgModule({
-  declarations: [GroupsPageComponent, AddGroupComponent, EditGroupComponent],
+  declarations: [GroupsPageComponent, AddGroupComponent, EditGroupComponent, LessonPlanComponent],
   imports: [
     CommonModule,
     GroupsPageRoutingModule,

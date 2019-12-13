@@ -1,0 +1,39 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Dodaj przedmiot</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="validationForm">
+            <div class="col">
+                <div class="md-form">
+                    <input mdbInput mdbValidate formControlName="name" type="text" minLength="8"
+                        class="form-control" id="form1">
+                    <label for="form1">Nazwa</label>
+                    <mdb-error *ngIf="name.invalid && (name.dirty || name.touched)">
+                        Musisz podać nazwę
+                    </mdb-error>
+                    <mdb-success *ngIf="name.valid && (name.dirty || name.touched)">
+                        Nazwa poprawna
+                    </mdb-success>
+                </div>
+                <select class="browser-default custom-select " formControlName="tutor">
+                    <option selected value="0">Wybierz nauczyciela</option>
+                    <option *ngFor="let el of teacherElements; let i = index" value={{el.pesel}}>
+                        {{el.firstName}} {{el.lastName}} {{el.pesel}}
+                    </option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="modalRef.hide()"
+            mdbWavesEffect>Zamknij
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+            [disabled]="validationForm.invalid" (click)="editRow()">Zapisz
+        </button>
+    </div>
+</div>

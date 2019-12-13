@@ -1,3 +1,4 @@
+import { GroupToEdit } from './../models/groupToEdit';
 import { Guid } from 'guid-typescript';
 import { GroupsTable } from 'src/app/shared/models/groupsTable';
 import { environment } from 'src/environments/environment';
@@ -26,6 +27,10 @@ export class GroupService {
 
     removeGroup(id: Guid) {
         return this.http.delete(`${environment.apiUrl}classes/${id}`);
+    }
+
+    updateGroup(groupToUpdate: GroupToEdit) {
+        return this.http.put(`${environment.apiUrl}classes/update`, groupToUpdate);
     }
 
     changeEditedClassId(message: GroupsTable) {

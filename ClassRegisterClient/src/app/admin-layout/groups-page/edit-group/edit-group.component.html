@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="form  text-center col-md-1">
                                         <button mdbBtn [disabled]="form.invalid" color="success" size="xl" mdbWavesEffect
-                                            (click)='editGroup()'>Dodaj</button>
+                                            (click)='editGroup()'>Edytuj</button>
                                     </div>
                                     <div class="form  text-center col-md-1">
                                     <button mdbBtn color="danger" size="xl" mdbWavesEffect
@@ -60,7 +60,7 @@
                                                 <tr *ngFor="let el of studentElements; let i = index">
                                                     <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                                                         scope="row">
-                                                        <input type="checkbox" [(ngModel)]='el.isChecked'>
+                                                        <input type="checkbox" [(ngModel)]='el.isAssigned'>
                                                     </th>
                                                     <td
                                                         *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">

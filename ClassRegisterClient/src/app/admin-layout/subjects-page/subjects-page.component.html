@@ -1,46 +1,56 @@
-<div class="container">
+<div [@routerTransition]>
+  <app-page-header [heading]="'Przedmioty'" [icon]="'fa-book'"></app-page-header>
+  <div class="card">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Lista przedmiotów</h3>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="md-form">
+            <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput />
+            <label for="search">Szukaj</label>
+          </div>
+        </div>
+        <div class="col-md-4 mx-auto text-center">
+          <div class="md-form">
+            <button mdbBtn color="success" size="xl" mdbWavesEffect (click)="addRow()">Dodaj</button>
+          </div>
+        </div>
+      </div>
+      <div id="table">
         <div class="row">
-          <table mdbTable striped="true">
+          <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" class="z-depth-1 text-center">
             <thead>
               <tr>
-                <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+                <th *ngFor="let head of headElements; let i = index" [sortBy]="tableNames[i]" [mdbTableSort]="elements"
+                  scope="col">{{ head | titlecase }}
+                  <mdb-icon fas icon="sort"></mdb-icon>
+                </th>
               </tr>
             </thead>
-            <tbody mdbTableCol *ngFor="let el of elements">
+            <tbody #row mdbTableCol *ngFor="let el of elements; let i = index">
               <tr>
-                <td scope="row">
-                  <button
-                    type="button"
-                    mdbBtn
-                    color="danger"
-                    class="master-button"
-                    mdbWavesEffect
-                    *ngIf="el.collapsed"
-                    (click)="el.collapsed = !el.collapsed"
-                  >
+                <td scope="row"
+                  *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                  <button type="button" mdbBtn color="danger" class="master-button" mdbWavesEffect *ngIf="el.collapsed"
+                    (click)="el.collapsed = !el.collapsed">
                     <mdb-icon fas icon="angle-down"></mdb-icon>
                   </button>
-                  <button
-                    type="button"
-                    mdbBtn
-                    color="success"
-                    class="master-button"
-                    mdbWavesEffect
-                    *ngIf="!el.collapsed"
-                    (click)="el.collapsed = !el.collapsed"
-                  >
+                  <button type="button" mdbBtn color="success" class="master-button" mdbWavesEffect
+                    *ngIf="!el.collapsed" (click)="el.collapsed = !el.collapsed">
                     <mdb-icon fas icon="angle-right"></mdb-icon>
                   </button>
                   <span class="ml-1">{{ el.id }}</span>
                 </td>
-                <td>{{ el.first }}</td>
-                <td>{{ el.last }}</td>
-                <td>{{ el.handle }}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                  {{ el.name }}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                  {{ el.teacherName }}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                  <button mdbBtn color="warning" size="sm" mdbWavesEffect (click)="editRow(el)">Edytuj</button>
+                  <button mdbBtn color="danger" size="sm" mdbWavesEffect (click)="removeRow(el)">Usuń</button>
+                </td>
               </tr>
-              <tr
-                *ngIf="el.collapsed"
-                style="text-align: center; background-color: rgba(0, 0, 0,  0.015)"
-              >
+              <tr *ngIf="el.collapsed" style="text-align: center; background-color: rgba(0, 0, 0,  0.015)">
                 <td colspan="100%" style="border: 0 !important">
                   <table mdbTable>
                     <thead class="black white-text">
@@ -48,18 +58,28 @@
                         <th *ngFor="let head of masterHeadElements" scope="col">{{ head }}</th>
                       </tr>
                     </thead>
-                    <tbody *ngFor="let detail of el.masterDetail">
+                    <tbody *ngFor="let group of el.groupsAssignedToSubject">
                       <tr>
-                        <td>{{ detail.orderId }}</td>
-                        <td>{{ detail.orderDate }}</td>
-                        <td>{{ detail.adress }}</td>
+                        <td>{{ group.id }}</td>
+                        <td>{{ group.name }}</td>
+                        <td>{{ group.studentsNumber }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </td>
               </tr>
             </tbody>
+            <tfoot class="grey lighten-5 w-100">
+              <tr>
+                <td colspan="4">
+                  <mdb-table-pagination [tableEl]="tableEl" paginationAlign="" [searchDataSource]="elements">
+                  </mdb-table-pagination>
+                </td>
+              </tr>
+            </tfoot>
           </table>
-      
         </div>
       </div>
+    </div>
+  </div>
+</div>

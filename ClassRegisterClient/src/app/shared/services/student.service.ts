@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student';
 import { environment } from 'src/environments/environment';
+import { Guid } from 'guid-typescript';
 
 
 @Injectable({ providedIn: 'root' })
@@ -28,5 +29,9 @@ export class StudentService {
 
     getToGroup() {
         return this.http.get<StudentsInGroup[]>(`${environment.apiUrl}students/stg`);
+    }
+
+    getToGroupEdit(classId: Guid) {
+        return this.http.get<StudentsInGroup[]>(`${environment.apiUrl}students/stg/${classId}`);
     }
 }

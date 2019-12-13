@@ -70,8 +70,7 @@ export class EditGroupComponent implements OnInit {
       .subscribe(
         result => {
           this.teacherElements = result;
-          this.form.controls['tutor'].setValue(this.currentEditedClass.tutorPesel);
-          console.log(this.form['tutor']);
+          this.form.controls.tutor.setValue(this.currentEditedClass.tutorPesel);
         },
         error => {
           this.alertService.error(error.message);
@@ -79,7 +78,7 @@ export class EditGroupComponent implements OnInit {
   }
 
   getStudentsToGroup() {
-    this.studentService.getToGroup().pipe(first())
+    this.studentService.getToGroupEdit(this.currentEditedClass.databaseId).pipe(first())
       .subscribe(
         result => {
           this.studentElements = result;
@@ -92,14 +91,25 @@ export class EditGroupComponent implements OnInit {
   }
 
   editGroup() {
-    const group: GroupToEdit = { name: this.form.value.name, tutorId: this.form.value.tutor,
-      studentsId: this.getCheckedStudents(), classId: this.currentEditedClass.databaseId };
+    const group: GroupToEdit = {
+      name: this.form.value.name, tutorId: this.form.value.tutor,
+      studentsId: this.getCheckedStudents(), classId: this.currentEditedClass.databaseId
+    };
+    this.groupService.updateGroup(group).pipe(first()).subscribe(
+      request => {
+        this.alertService.success('Edytowano grupę', true);
+        this.router.navigate(['groups-page']);
+      },
+      error => {
+        this.alertService.error(error);
+      }
+    );
   }
 
   getCheckedStudents() {
     const students: Guid[] = [];
     this.studentElements.forEach(element => {
-      if (element.isChecked) {
+      if (element.isAssigned) {
         students.push(element.id);
       }
     });

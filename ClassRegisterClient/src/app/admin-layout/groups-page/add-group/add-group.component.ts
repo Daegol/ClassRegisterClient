@@ -102,7 +102,7 @@ export class AddGroupComponent implements OnInit {
   getCheckedStudents() {
     const students: Guid[] = [];
     this.studentElements.forEach(element => {
-      if (element.isChecked) {
+      if (element.isAssigned) {
         students.push(element.id);
       }
     });

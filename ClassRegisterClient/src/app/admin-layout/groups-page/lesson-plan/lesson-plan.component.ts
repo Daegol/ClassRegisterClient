@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { GroupService, PlanService, AlertService } from 'src/app/shared';
-import { GroupsTable } from 'src/app/shared/models/groupsTable';
-import { Plan } from 'src/app/shared/models/plan';
-import { first } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { GroupService, PlanService, AlertService } from "src/app/shared";
+import { GroupsTable } from "src/app/shared/models/groupsTable";
+import { Plan } from "src/app/shared/models/plan";
+import { first } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-lesson-plan',
-  templateUrl: './lesson-plan.component.html',
-  styleUrls: ['./lesson-plan.component.scss']
+  selector: "app-lesson-plan",
+  templateUrl: "./lesson-plan.component.html",
+  styleUrls: ["./lesson-plan.component.scss"]
 })
 export class LessonPlanComponent implements OnInit {
   currentClass: GroupsTable;
@@ -41,7 +41,15 @@ export class LessonPlanComponent implements OnInit {
       );
   }
 
+  edit() {
+    
+  }
+
+  cancel() {
+    this.router.navigate(["groups-page"]);
+  }
+
   add() {
-    this.router.navigate(['groups-page/add-plan']);
+    this.router.navigate(["groups-page/add-plan"]);
   }
 }

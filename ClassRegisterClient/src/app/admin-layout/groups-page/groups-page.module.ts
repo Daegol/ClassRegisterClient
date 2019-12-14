@@ -9,10 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { EditGroupComponent } from './edit-group/edit-group.component';
 import { LessonPlanComponent } from './lesson-plan/lesson-plan.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddLessonPlanComponent } from './add-lesson-plan/add-lesson-plan.component';
 
 
 @NgModule({
-  declarations: [GroupsPageComponent, AddGroupComponent, EditGroupComponent, LessonPlanComponent],
+  declarations: [GroupsPageComponent, AddGroupComponent, EditGroupComponent, LessonPlanComponent, AddLessonPlanComponent],
   imports: [
     CommonModule,
     GroupsPageRoutingModule,

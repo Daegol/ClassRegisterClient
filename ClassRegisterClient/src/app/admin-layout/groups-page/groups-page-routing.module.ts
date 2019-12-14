@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GroupsPageComponent } from './groups-page.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { EditGroupComponent } from './edit-group/edit-group.component';
+import { AddLessonPlanComponent } from './add-lesson-plan/add-lesson-plan.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'plan',
     component: LessonPlanComponent
+  },
+  {
+    path: 'add-plan',
+    component: AddLessonPlanComponent
   }
 ];
 

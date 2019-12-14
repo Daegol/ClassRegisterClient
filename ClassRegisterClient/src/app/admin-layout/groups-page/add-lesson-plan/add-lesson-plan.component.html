@@ -1,0 +1,68 @@
+<div>
+    <app-page-header [heading]="'Plan'" [icon]="'fa-group'"></app-page-header>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Dodaj plan</h3>
+        <div class="card-body">
+                <div class="row">
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Poniedziałek</li>
+                        <li *ngFor="let lesson of lessons; let i = index" class="list-group-item">
+                            <select class="form-control" [(ngModel)]="monday[i]" >
+                                <option *ngFor="let el of subjectElements" value={{el.databaseId}}>
+                                    {{el.name}}
+                                </option>
+                            </select>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Wtorek</li>
+                        <li *ngFor="let lesson of lessons; let i = index" class="list-group-item">
+                            <select class="form-control" [(ngModel)]="tuesday[i]">
+                                <option *ngFor="let el of subjectElements; let i = index" value={{el.databaseId}}>
+                                    {{el.name}}
+                                </option>
+                            </select>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Środa</li>
+                        <li *ngFor="let lesson of lessons; let i = index" class="list-group-item">
+                            <select class="form-control" [(ngModel)]="wednesday[i]">
+                                <option *ngFor="let el of subjectElements; let i = index" value={{el.databaseId}}>
+                                    {{el.name}}
+                                </option>
+                            </select>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Czwartek</li>
+                        <li *ngFor="let lesson of lessons; let i = index" class="list-group-item">
+                            <select class="form-control" [(ngModel)]="thursday[i]">
+                                <option *ngFor="let el of subjectElements; let i = index" value={{el.databaseId}}>
+                                    {{el.name}}
+                                </option>
+                            </select>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Piątek</li>
+                        <li *ngFor="let lesson of lessons; let i = index" class="list-group-item">
+                            <select class="form-control" [(ngModel)]="friday[i]">
+                                <option *ngFor="let el of subjectElements; let i = index" value={{el.databaseId}}>
+                                    {{el.name}}
+                                </option>
+                            </select>
+                        </li>
+                    </div>
+                </div>
+            <div class="row">
+                <button type="button" mdbBtn color="primary" class="relative waves-light col" mdbWavesEffect
+                    (click)="save()">Zapisz
+                </button>
+                <button type="button" mdbBtn color="secondary" class="relative waves-light col" mdbWavesEffect
+                    (click)="cancel()">Anuluj
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

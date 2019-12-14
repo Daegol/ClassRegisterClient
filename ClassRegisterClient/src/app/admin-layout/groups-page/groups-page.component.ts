@@ -60,7 +60,8 @@ export class GroupsPageComponent implements OnInit, AfterViewInit {
   }
 
   openPlan(el: any) {
-    
+    this.groupService.changeEditedClassId(el);
+    this.router.navigate(["groups-page/plan"]);
   }
 
   removeRow(el: any) {

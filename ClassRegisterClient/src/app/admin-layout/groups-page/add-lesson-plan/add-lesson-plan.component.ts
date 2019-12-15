@@ -33,7 +33,7 @@ export class AddLessonPlanComponent implements OnInit {
     private alertService: AlertService,
     private subjectService: SubjectService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.groupService.currentEditedClassId.subscribe(
@@ -60,7 +60,7 @@ export class AddLessonPlanComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(["groups-page"]);
+    this.router.navigate(["admin/groups-page"]);
   }
 
   save() {
@@ -116,8 +116,8 @@ export class AddLessonPlanComponent implements OnInit {
     }
     this.planService.addPlan(planToAdd).pipe(first()).subscribe(
       result => {
-        this.alertService.success("Plan został dodany",true);
-        this.router.navigate(["groups-page"]);
+        this.alertService.success("Plan został dodany", true);
+        this.router.navigate(["admin/groups-page"]);
       },
       error => {
         this.alertService.error(error);

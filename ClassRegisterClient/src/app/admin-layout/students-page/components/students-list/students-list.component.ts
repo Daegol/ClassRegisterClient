@@ -20,8 +20,8 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   elements: UserTable[] = [];
-  headElements = ['Id', 'Imię', 'Nazwisko', 'Email', 'Pesel', 'Numer telefonu', 'Adres', 'Akcja'];
-  tableNames = ['id', 'firstName', 'lastName', 'email', 'pesel', 'phoneNumber', 'address'];
+  headElements = ['Id', 'Imię', 'Nazwisko', 'Email', 'Pesel', 'Numer telefonu', 'Adres', 'Pesel Rodzica', 'Akcja'];
+  tableNames = ['id', 'firstName', 'lastName', 'email', 'pesel', 'phoneNumber', 'address', 'parentPesel'];
   searchText = '';
   previous: string;
 

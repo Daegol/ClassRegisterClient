@@ -51,6 +51,9 @@
                 {{el.address}}
               </td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.parentPesel}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                 <button mdbBtn color="warning" size="sm" mdbWavesEffect (click)="editRow(el)">Edytuj</button>
                 <button mdbBtn color="danger" size="sm" mdbWavesEffect (click)="removeRow(el)">Usuń</button>
               </td>

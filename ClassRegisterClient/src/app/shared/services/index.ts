@@ -6,3 +6,4 @@ export * from './admin.service';
 export * from './parent.service';
 export * from './group.service';
 export * from './plan.service';
+export * from './grades.service';

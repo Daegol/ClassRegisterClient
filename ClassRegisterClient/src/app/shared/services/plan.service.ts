@@ -16,4 +16,9 @@ export class PlanService {
   addPlan(plan: PlanToAdd) {
       return this.http.post(`${environment.apiUrl}classes/plan/add`, plan);
   }
+
+  deletePlan(classId: Guid) {
+    return this.http.delete(`${environment.apiUrl}classes/plan/delete/${classId}`);
+  }
+
 }

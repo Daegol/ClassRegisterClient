@@ -1,16 +1,18 @@
+import { GroupAssignedToSubject } from './../../shared/models/groupAssignedToSubject';
+import { GradesService } from './../../shared/services/grades.service';
+import { Router } from '@angular/router';
 import { SubjectToUpdate } from './../../shared/models/subjectToUpdate';
-import { ModalEditComponent } from './../../shared/modules/modal-edit/modal-edit.component';
 import { SubjectToCreate } from './../../shared/models/subjectToCreate';
 import { AlertService } from './../../shared/services/alert.service';
 import { SubjectService } from './../../shared/services/subject.service';
 import { ModalAddSubjectComponent } from './../../shared/modules/modal-add-subject/modal-add-subject.component';
-import { ModalAddComponent } from './../../shared/modules/modal-add/modal-add.component';
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { SubjectToTable } from 'src/app/shared/models/subjectToTable';
 import { first } from 'rxjs/operators';
-import { Alert } from 'selenium-webdriver';
 import { ModalEditSubjectComponent } from 'src/app/shared/modules/modal-edit-subject/modal-edit-subject.component';
+import { SubjectToGrades } from 'src/app/shared/models/subjectToGrades';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-subjects-page',
@@ -24,16 +26,19 @@ export class SubjectsPageComponent implements OnInit, AfterViewInit {
   searchText = '';
   previous = '';
   modalRef: MDBModalRef;
+  subjectToGrade: SubjectToGrades;
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private modalService: MDBModalService,
     private subjectService: SubjectService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private gradesService: GradesService,
+    private router: Router
   ) { }
 
   headElements = ['ID', 'Nazwa', 'Prowadzący', 'Akcja'];
-  masterHeadElements = ['ID', 'Nazwa Grupy', 'Liczba uczniów'];
+  masterHeadElements = ['ID', 'Nazwa Grupy', 'Liczba uczniów', 'Oceny'];
   tableNames = ['id', 'name', 'teacherName'];
   elements: SubjectToTable[] = [];
 
@@ -56,6 +61,7 @@ export class SubjectsPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.gradesService.currentEditedClassId.subscribe(message => this.subjectToGrade = message);
     this.getAllSubjects();
   }
 
@@ -129,6 +135,15 @@ export class SubjectsPageComponent implements OnInit, AfterViewInit {
         this.alertService.error(error);
       }
     );
+  }
+
+  grades(el: SubjectToTable, group: GroupAssignedToSubject) {
+    const gradesData: SubjectToGrades = {
+      subjectId: el.databaseId, teacherPesel: el.teacherPesel,
+      groupId: Guid.parse(group.id.toString()), subjectName: el.name, teacherName: el.teacherName
+    };
+    this.gradesService.changeEditedClassId(gradesData);
+    this.router.navigate(['admin/subjects-page/grades']);
   }
 
 }

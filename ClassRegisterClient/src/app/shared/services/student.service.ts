@@ -1,3 +1,4 @@
+import { StudentToGrade } from './../models/studentsToGrade';
 import { StudentsInGroup } from 'src/app/shared/models/studentsInGroup';
 import { UserTable } from './../models/userTable';
 import { UserRegistrationDto } from './../models/userRegistrationDto';
@@ -33,5 +34,9 @@ export class StudentService {
 
     getToGroupEdit(classId: Guid) {
         return this.http.get<StudentsInGroup[]>(`${environment.apiUrl}students/stg/${classId}`);
+    }
+
+    getToGrades(classId: Guid) {
+        return this.http.get<StudentToGrade[]>(`${environment.apiUrl}students/grade/${classId}`);
     }
 }

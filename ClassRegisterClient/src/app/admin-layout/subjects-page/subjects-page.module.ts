@@ -6,10 +6,11 @@ import { SubjectsPageComponent } from './subjects-page.component';
 import { PageHeaderModule } from 'src/app/shared';
 import { TableModule, IconsModule, WavesModule, ButtonsModule, MDBBootstrapModule, InputsModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GradesComponent } from './grades/grades.component';
 
 
 @NgModule({
-  declarations: [SubjectsPageComponent],
+  declarations: [SubjectsPageComponent, GradesComponent],
   imports: [
     CommonModule,
     SubjectsPageRoutingModule,

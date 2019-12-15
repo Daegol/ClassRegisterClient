@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<div>
   <app-page-header [heading]="'Przedmioty'" [icon]="'fa-book'"></app-page-header>
   <div class="card">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Lista przedmiotów</h3>
@@ -63,6 +63,9 @@
                         <td>{{ group.id }}</td>
                         <td>{{ group.name }}</td>
                         <td>{{ group.studentsNumber }}</td>
+                        <td>
+                          <button mdbBtn color="secondary" size="sm" mdbWavesEffect (click)="grades(el, group)">Oceny</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

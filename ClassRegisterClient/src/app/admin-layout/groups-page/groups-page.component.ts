@@ -56,12 +56,12 @@ export class GroupsPageComponent implements OnInit, AfterViewInit {
 
   editRow(el: any) {
     this.groupService.changeEditedClassId(el);
-    this.router.navigate(['groups-page/edit']);
+    this.router.navigate(['admin/groups-page/edit']);
   }
 
   openPlan(el: any) {
     this.groupService.changeEditedClassId(el);
-    this.router.navigate(["groups-page/plan"]);
+    this.router.navigate(["admin/groups-page/plan"]);
   }
 
   removeRow(el: any) {

@@ -6,4 +6,5 @@ export class UserTable {
     phoneNumber: string;
     pesel: string;
     address: string;
+    parentPesel: string;
 }

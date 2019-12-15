@@ -1,0 +1,112 @@
+<div>
+    <app-page-header [heading]="'Oceny'" [icon]="'fa-book'"></app-page-header>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Uczniowie</h3>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="md-form">
+                        <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput />
+                        <label for="search">Szukaj</label>
+                    </div>
+                </div>
+            </div>
+            <div id="table">
+                <div class="row">
+                    <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" class="z-depth-1 text-center">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let head of headElements; let i = index" [sortBy]="tableNames[i]"
+                                    [mdbTableSort]="elements" scope="col">{{ head | titlecase }}
+                                    <mdb-icon fas icon="sort"></mdb-icon>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody #row mdbTableCol *ngFor="let el of elements; let i = index">
+                            <tr>
+                                <td scope="row"
+                                    *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                    <button type="button" mdbBtn color="danger" class="master-button" mdbWavesEffect
+                                        *ngIf="el.collapsed" (click)="el.collapsed = !el.collapsed">
+                                        <mdb-icon fas icon="angle-down"></mdb-icon>
+                                    </button>
+                                    <button type="button" mdbBtn color="success" class="master-button" mdbWavesEffect
+                                        *ngIf="!el.collapsed" (click)="el.collapsed = !el.collapsed">
+                                        Oceny
+                                    </button>
+                                    <span class="ml-1">{{ el.id }}</span>
+                                </td>
+                                <td
+                                    *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                    {{ el.firstName }}</td>
+                                <td
+                                    *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                    {{ el.lastName }}</td>
+                                <td
+                                    *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                    {{ el.pesel }}</td>
+                                <td
+                                    *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                    <button mdbBtn color="primary" mdbWavesEffect (click)="addGrade(el)">Dodaj
+                                        ocenę</button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="el.collapsed"
+                                style="text-align: center; background-color: rgba(0, 0, 0,  0.015)">
+                                <td colspan="100%" style="border: 0 !important">
+                                    <table mdbTable>
+                                        <thead class="black white-text">
+                                            <tr>
+                                                <th *ngFor="let head of masterHeadElements" scope="col">{{ head }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let grade of el.grades">
+                                                <tr>
+                                                    <td>{{ grade.id }}</td>
+                                                    <td>
+                                                        <select class="browser-default custom-select "
+                                                            [(ngModel)]="grade.value">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="browser-default custom-select "
+                                                            [(ngModel)]="grade.type">
+                                                            <option value="Sprawdzian">Sprawdzian</option>
+                                                            <option value="Odpowiedź">Odpowiedź</option>
+                                                            <option value="Praca">Praca domowa</option>
+                                                            <option value="Kartkówka">Kartkówka</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <button mdbBtn color="secondary" mdbWavesEffect
+                                                            (click)="save(el, grade)">Zapisz</button>
+                                                            <button mdbBtn color="danger" mdbWavesEffect
+                                                            (click)="delete(el, grade)">Usuń</button>
+                                                    </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="grey lighten-5 w-100">
+                            <tr>
+                                <td colspan="4">
+                                    <mdb-table-pagination [tableEl]="tableEl" paginationAlign=""
+                                        [searchDataSource]="elements">
+                                    </mdb-table-pagination>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

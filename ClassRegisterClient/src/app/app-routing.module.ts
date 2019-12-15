@@ -4,10 +4,18 @@ import { AuthGuard } from './shared';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     loadChildren: () =>
       import('./admin-layout/admin-layout.module').then(
         m => m.AdminLayoutModule
+      ),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'student',
+    loadChildren: () =>
+      import('./student-layout/student-layout.module').then(
+        m => m.StudentLayoutModule
       ),
     canActivate: [AuthGuard]
   },

@@ -91,7 +91,7 @@ export class AddGroupComponent implements OnInit {
     this.groupService.addGroup(group).pipe(first()).subscribe(
       request => {
         this.alertService.success('Dodano grupę', true);
-        this.router.navigate(['groups-page']);
+        this.router.navigate(['admin/groups-page']);
       },
       error => {
         this.alertService.error(error);
@@ -112,7 +112,7 @@ export class AddGroupComponent implements OnInit {
   get name() { return this.form.get('name'); }
 
   cancel() {
-    this.router.navigate(['groups-page']);
+    this.router.navigate(['admin/groups-page']);
   }
 
 }

@@ -98,7 +98,7 @@ export class EditGroupComponent implements OnInit {
     this.groupService.updateGroup(group).pipe(first()).subscribe(
       request => {
         this.alertService.success('Edytowano grupę', true);
-        this.router.navigate(['groups-page']);
+        this.router.navigate(['admin/groups-page']);
       },
       error => {
         this.alertService.error(error);
@@ -120,7 +120,7 @@ export class EditGroupComponent implements OnInit {
 
 
   cancel() {
-    this.router.navigate(['groups-page']);
+    this.router.navigate(['admin/groups-page']);
   }
 }
 

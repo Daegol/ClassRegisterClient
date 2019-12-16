@@ -1,0 +1,55 @@
+<div>
+    <app-page-header [heading]="'Plan'" [icon]="'fa-group'"></app-page-header>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Plan lekcji</h3>
+        <div class="card-body">
+            <div *ngIf="!planIsExisting" class="row text-center">
+                <h5 class="text-center col-md-12">Plan jeszcze nie został dodany</h5>
+            </div>
+            <div *ngIf="planIsExisting">
+                <div class="row">
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Poniedziałek</li>
+                        <li *ngFor="let lesson of elements; let i = index" class="list-group-item list-group-item-dark">
+                            <div *ngIf="plan.monday.length > i">
+                                {{plan.monday[i].subjectName}}
+                            </div>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Wtorek</li>
+                        <li *ngFor="let lesson of elements; let i = index" class="list-group-item list-group-item-dark">
+                            <div *ngIf="plan.tuesday.length > i">
+                                {{plan.tuesday[i].subjectName}}
+                            </div>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Środa</li>
+                        <li *ngFor="let lesson of elements; let i = index" class="list-group-item list-group-item-dark">
+                            <div *ngIf="plan.wednesday.length > i">
+                                {{plan.wednesday[i].subjectName}}
+                            </div>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Czwartek</li>
+                        <li *ngFor="let lesson of elements; let i = index" class="list-group-item list-group-item-dark">
+                            <div *ngIf="plan.thursday.length > i">
+                                {{plan.thursday[i].subjectName}}
+                            </div>
+                        </li>
+                    </div>
+                    <div class="list-group col">
+                        <li class="list-group-item bg-dark text-white">Piątek</li>
+                        <li *ngFor="let lesson of elements; let i = index" class="list-group-item list-group-item-dark">
+                            <div *ngIf="plan.friday.length > i">
+                                {{plan.friday[i].subjectName}}
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

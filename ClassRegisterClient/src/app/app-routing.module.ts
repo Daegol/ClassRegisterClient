@@ -1,13 +1,26 @@
+import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared';
 
 const routes: Routes = [
   {
+    path: '',
+    component: AppComponent
+  },
+  {
     path: 'admin',
     loadChildren: () =>
       import('./admin-layout/admin-layout.module').then(
         m => m.AdminLayoutModule
+      ),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'parent',
+    loadChildren: () =>
+      import('./parent-layout/parent-layout.module').then(
+        m => m.ParentLayoutModule
       ),
     canActivate: [AuthGuard]
   },

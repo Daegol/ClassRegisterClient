@@ -21,4 +21,8 @@ export class PlanService {
     return this.http.delete(`${environment.apiUrl}classes/plan/delete/${classId}`);
   }
 
+  getPlanForParent(id: Guid) {
+    return this.http.get<Plan>(`${environment.apiUrl}parents/plan/${id}`);
+  }
+
 }

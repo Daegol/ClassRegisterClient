@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+    <thead class="sticky-top">
+        <tr>
+            <th class="bg-dark text-white" *ngFor="let head of headElements; let i = index" scope="col">{{head | titlecase}}
+            </th>
+        </tr>
+    </thead>
+    <tbody #row>
+        <tr *ngFor="let el of elements; let i = index;">
+            <td class="table-active" style="width: 35%">{{el.subject}}</td>
+            <td class="table-active" style="width: 65%">{{el.grades}}</td>
+        </tr>
+    </tbody>
+</table>

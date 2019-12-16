@@ -136,6 +136,14 @@
                         </div>
                     </div>
                 </div>
+                <div *ngIf="isParent" class="row">
+                    <select class="browser-default custom-select " formControlName="child">
+                        <option selected value="0">Wybierz dziecko</option>
+                        <option *ngFor="let el of studentsElements; let i = index" value={{el.pesel}}>
+                            {{el.firstName}} {{el.lastName}} {{el.pesel}}
+                        </option>
+                    </select>
+                </div>
             </form>
         </div>
         <div class="modal-footer">

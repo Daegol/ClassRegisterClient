@@ -1,3 +1,5 @@
+import { Guid } from 'guid-typescript';
+
 export class Student {
     FirstName: string;
     LastName: string;
@@ -5,4 +7,5 @@ export class Student {
     PhoneNumber: string;
     Pesel: string;
     Address: string;
+    Id: string;
 }

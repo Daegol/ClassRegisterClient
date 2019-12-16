@@ -66,7 +66,7 @@ export class GradesComponent implements OnInit, AfterViewInit {
   }
 
   getStudentsWithGrades() {
-    this.studentsService.getToGrades(this.subjectToGrade.groupId).pipe(first()).subscribe(
+    this.studentsService.getToGrades(this.subjectToGrade.groupId, this.subjectToGrade.subjectId).pipe(first()).subscribe(
       result => {
         this.elements = result;
         this.mdbTable.setDataSource(this.elements);

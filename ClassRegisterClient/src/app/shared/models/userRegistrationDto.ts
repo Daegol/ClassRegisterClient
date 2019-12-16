@@ -1,3 +1,5 @@
+import { Guid } from 'guid-typescript';
+
 export class UserRegistrationDto {
     Role: string;
     FirstName: string;
@@ -10,4 +12,5 @@ export class UserRegistrationDto {
     Street: string;
     HouseNumber: string;
     Password: string;
+    studentId: string;
 }

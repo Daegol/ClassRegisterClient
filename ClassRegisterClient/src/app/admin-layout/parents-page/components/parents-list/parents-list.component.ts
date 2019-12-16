@@ -18,7 +18,7 @@ export class ParentsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   elements: UserTable[] = [];
-  headElements = ['Id', 'Imię', 'Nazwisko', 'Email', 'Pesel', 'Numer telefonu', 'Adres','Pesel Dziecka', 'Akcja'];
+  headElements = ['Id', 'Imię', 'Nazwisko', 'Email', 'Pesel', 'Numer telefonu', 'Adres', 'Pesel Dziecka', 'Akcja'];
   tableNames = ['id', 'firstName', 'lastName', 'email', 'pesel', 'phoneNumber', 'address', 'parentPesel'];
   searchText = '';
   previous: string;
@@ -65,7 +65,8 @@ export class ParentsListComponent implements OnInit, AfterViewInit {
     const elementIndex = this.elements.findIndex((elem: any) => el === elem);
     const modalOptions = {
       data: {
-        editableRow: el
+        editableRow: el,
+        isParent: true,
       }
     };
     this.modalRef = this.modalService.show(ModalEditComponent, modalOptions);
@@ -98,7 +99,12 @@ export class ParentsListComponent implements OnInit, AfterViewInit {
   }
 
   addRow() {
-    this.modalRef = this.modalService.show(ModalAddComponent);
+    const modalOptions = {
+      data: {
+        isParent: true,
+      }
+    };
+    this.modalRef = this.modalService.show(ModalAddComponent, modalOptions);
     this.modalRef.content.saveButtonClicked.subscribe((newElement: UserRegistrationDto) => {
       newElement.Role = 'Parent';
       this.parentService.register(newElement).pipe(first()).subscribe(

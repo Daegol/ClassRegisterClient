@@ -1,3 +1,4 @@
+import { StudentGrades } from './../models/studentGrades';
 import { GradeToUpdate } from './../models/gradeToUpdate';
 import { GradeToAdd } from './../models/gradeToAdd';
 import { Injectable } from '@angular/core';
@@ -31,5 +32,9 @@ export class GradesService {
 
     changeEditedClassId(message: SubjectToGrades) {
         return this.editedClass.next(message);
+    }
+
+    getGradesForParent(id: Guid) {
+        return this.http.get<StudentGrades[]>(`${environment.apiUrl}grades/student/${id}`);
     }
 }

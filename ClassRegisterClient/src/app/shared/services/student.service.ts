@@ -1,3 +1,4 @@
+import { StudentToParent } from './../models/studentsToParent';
 import { StudentToGrade } from './../models/studentsToGrade';
 import { StudentsInGroup } from 'src/app/shared/models/studentsInGroup';
 import { UserTable } from './../models/userTable';
@@ -36,7 +37,11 @@ export class StudentService {
         return this.http.get<StudentsInGroup[]>(`${environment.apiUrl}students/stg/${classId}`);
     }
 
-    getToGrades(classId: Guid) {
-        return this.http.get<StudentToGrade[]>(`${environment.apiUrl}students/grade/${classId}`);
+    getToGrades(classId: Guid, subjectId: Guid) {
+        return this.http.get<StudentToGrade[]>(`${environment.apiUrl}students/grade/${classId}/${subjectId}`);
+    }
+
+    getToParent() {
+        return this.http.get<StudentToParent[]>(`${environment.apiUrl}students/parent`);
     }
 }

@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript';
 export class Parent {
     FirstName: string;
     LastName: string;
@@ -5,4 +6,5 @@ export class Parent {
     PhoneNumber: string;
     Pesel: string;
     Address: string;
+    Id: Guid;
 }
